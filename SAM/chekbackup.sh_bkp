@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#########################################################################
+#                                                                       #
+# Leitura de Bilhetes Tarifação - Coleta quantidade de ligaçoes no dia  #
+#                                                                       #
+#                                                                       #
+# Autor: Mario (email de contato)                                       #
+# Data de criação: 22.09.20                                             #
+#                                                                       #
+# Descrição : Calcula ligações do dia coletando quantidade de linhas    #
+# utilizando os bilhetes em 192.168.0.5.                                #
+# LigDia.txt - Armazena o nome do arquivo referente ao dia              #
+# LigDia02.txt - Armazena a quantidade de linhas do arquivo LigDia.txt  #
+#                                                                       #
+# Exemplo de uso: ./LeBilheteDia.sh                                     #
+#                                                                       #
+# Alterações                                                            #
+#                                                                       #
+#########################################################################
+
+DIA=$(date +%d)
+MES=$(date +%m)
+ANO=$(date +%Y)
+
+HORA=$(date +%H)
+
+
+#echo $HORA
+
+
+DATADIA=$DIA`echo "-"`$MES`echo "-"`$ANO
+
+#echo $DATADIA  #imprime data dia-mes-ano
+
+
+CAMINHO="/mnt/sam/" #Caminho do arquivo
+
+
+LISTACOMPLETA=`ls -ltr $CAMINHO > /tmp/BackupSAM.txt` #envia lista com todos os arquivos de backup
+#LISTA=`ls -la $CAMINHO |grep $DIA > /tmp/BackupSAM.txt` #envia lista com nome dos arquivos
+
+
+#QTDARQ=`tail  /tmp/BackupSAM.txt |cut -d" " -f1 ` #Conta quanto arquivos foi encontrado com o valor do mes
+QTDARQ=` tail -n10  /tmp/BackupSAM.txt  > /tmp/tailsam.txt` #Lista as 10 ultimas linhas do arquivo
+QTDARQ=` sort -r  /tmp/tailsam.txt  > /tmp/tailsam2.txt` #Inverte a ordem da listagem para que fique em ordem crescente
+
+ULTIMOBKP=` cat /tmp/tailsam2.txt | cut -d" " -f9 | head -n1 ` #pega o primeiro nome da lista
+
+ULTIMOBKPDIA=` echo  $ULTIMOBKP | cut -d"_" -f2 ` #pega a data do arquivo mais recente
+
+ULTIMOBKPHORA=` echo  $ULTIMOBKP | cut -d"_" -f3 |cut -d"-" -f1 ` #pega o horario do backup
+ULTIMOBKPHORA02=` echo  $ULTIMOBKP | cut -d"_" -f3 |cut -d"-" -f2 ` #pega o horario do backup
+
+
+
+#echo $ULTIMOBKPDIA
+#echo $ULTIMOBKPHORA	
+
+BKPREALIZADO=$ULTIMOBKPDIA`echo " "`$ULTIMOBKPHORA`echo ":" `$ULTIMOBKPHORA02 
+echo $BKPREALIZADO > /tmp/ultimobkpsam.txt
+
+
+
+
+
+
