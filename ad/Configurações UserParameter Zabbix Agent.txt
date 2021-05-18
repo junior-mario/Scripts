@@ -1,0 +1,2 @@
+#Coleta log tftp AD
+UserParameter=tftpad[*],cat /tmp/tftp.txt
