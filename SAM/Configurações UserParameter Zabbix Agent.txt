@@ -1,0 +1,3 @@
+#Coleta ultimo bkp SAM
+UserParameter=bkpsam[*],cat /tmp/ultimobkpsam.txt
+UserParameter=bkpsam02[*],cat /tmp/backupsamrealizado.txt
