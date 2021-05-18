@@ -1,0 +1,10 @@
+#Coleta inforçoes de tarifação
+UserParameter=LigDiaCel[*],cat /tmp/LigDiaCel02.txt
+UserParameter=LigDiaDDD[*],cat /tmp/LigDiaDDD02.txt
+UserParameter=LigDiaLocal[*],cat /tmp/LigDiaLocal02.txt
+UserParameter=LigDia[*],cat /tmp/LigDia02.txt
+
+UserParameter=LigMes[*],cat /tmp/LigMes02.txt
+UserParameter=LigMesCel[*],cat /tmp/LigMesCel02.txt
+UserParameter=LigMesDDD[*],cat /tmp/LigMesDDD02.txt
+UserParameter=LigMesLocal[*],cat /tmp/LigMesLocal02.txt
